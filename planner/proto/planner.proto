@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package planner;
+
+option go_package = "github.com/MuaazTasawar/skymind/gateway/proto;plannerproto";
+
+// ─── Shared coordinate types ──────────────────────────────────
+
+message LatLng {
+  double lat = 1;
+  double lng = 2;
+}
+
+message Waypoint {
+  double lat = 1;
+  double lng   = 2;
+  double alt_m = 3;
+}
+
+// ─── PlanMission ─────────────────────────────────────────────
+// Called by the Go gateway when a new mission is created.
+// The planner decomposes the polygon zone into sub-zones,
+// assigns each to a drone, and returns per-drone waypoint paths.
+
+message PlanMissionRequest {
+  string mission_id  = 1;
+  repeated LatLng zone_polygon = 2;   // polygon boundary coordinates
+  repeated DroneInfo drones    = 3;   // available drones with current positions
+  double altitude_m  = 4;
+  double airspeed_ms = 5;
+  double strip_width_m = 6;           // lawnmower strip width (default 10m)
+}
+
+message DroneInfo {
+  string drone_id = 1;
+  string name     = 2;
+  double lat      = 3;
+  double lng      = 4;
+  int32  battery  = 5;
+}
+
+message ZoneAssignment {
+  string zone_id           = 1;
+  string drone_id          = 2;
+  repeated Waypoint waypoints = 3;
+  repeated LatLng sub_polygon = 4;   // the sub-zone polygon this drone covers
+}
+
+message PlanMissionResponse {
+  string mission_id              = 1;
+  repeated ZoneAssignment zones  = 2;
+  string status                  = 3;  // "ok" | "error"
+  string error                   = 4;
+}
+
+// ─── ReassignZone ────────────────────────────────────────────
+// Called by the Go gateway when a drone faults mid-mission.
+// The planner re-partitions the remaining uncovered area
+// among the still-available drones.
+
+message ReassignZoneRequest {
+  string mission_id          = 1;
+  string faulted_drone_id    = 2;
+  string faulted_zone_id     = 3;
+  repeated DroneInfo available_drones = 4;
+  double altitude_m          = 5;
+  double airspeed_ms         = 6;
+  double strip_width_m       = 7;
+}
+
+message ReassignZoneResponse {
+  string replacement_drone_id          = 1;
+  repeated ZoneAssignment new_zones    = 2;
+  string status                        = 3;
+  string error                         = 4;
+}
+
+// ─── DetectObjects ───────────────────────────────────────────
+// Called with a base64-encoded frame from a drone camera feed.
+// Returns YOLOv8 detections for that frame.
+
+message DetectObjectsRequest {
+  string drone_id      = 1;
+  string mission_id    = 2;
+  bytes  frame_jpeg    = 3;   // raw JPEG bytes
+  int32  frame_width   = 4;
+  int32  frame_height  = 5;
+}
+
+message Detection {
+  string label      = 1;
+  float  confidence = 2;
+  float  x1         = 3;
+  float  y1         = 4;
+  float  x2         = 5;
+  float  y2         = 6;
+}
+
+message DetectObjectsResponse {
+  string drone_id          = 1;
+  repeated Detection detections = 2;
+  int64  timestamp_ms      = 3;
+}
+
+// ─── Service definition ───────────────────────────────────────
+
+service PlannerService {
+  rpc PlanMission    (PlanMissionRequest)    returns (PlanMissionResponse);
+  rpc ReassignZone   (ReassignZoneRequest)   returns (ReassignZoneResponse);
+  rpc DetectObjects  (DetectObjectsRequest)  returns (DetectObjectsResponse);
+}
