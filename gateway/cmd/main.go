@@ -12,6 +12,7 @@ import (
 	"github.com/MuaazTasawar/skymind/gateway/internal/auth"
 	"github.com/MuaazTasawar/skymind/gateway/internal/db"
 	"github.com/MuaazTasawar/skymind/gateway/internal/mavlink"
+	"github.com/MuaazTasawar/skymind/gateway/internal/mission"
 	"github.com/MuaazTasawar/skymind/gateway/internal/telemetry"
 	"github.com/MuaazTasawar/skymind/gateway/internal/ws"
 	"github.com/gofiber/fiber/v2"
@@ -113,10 +114,10 @@ func main() {
 	})
 
 	// Missions (stubbed — wired in Phase 3)
-	api.Get("/missions", handleGetMissions)
-	api.Post("/missions", handleCreateMission)
-	api.Get("/missions/:id", handleGetMission)
-	api.Patch("/missions/:id/status", handleUpdateMissionStatus)
+	api.Get("/missions", mission.HandleGetMissions)
+	api.Post("/missions", mission.HandleCreateMission)
+	api.Get("/missions/:id", mission.HandleGetMission)
+	api.Patch("/missions/:id/status", mission.HandleUpdateMissionStatus)
 
 	// ── WebSocket ─────────────────────────────────────────────────────────
 	app.Use("/ws", func(c *fiber.Ctx) error {
