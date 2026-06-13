@@ -1,0 +1,10 @@
+grpcio==1.63.0
+grpcio-tools==1.63.0
+protobuf==5.26.1
+numpy==1.26.4
+scipy==1.13.1
+shapely==2.0.4
+ultralytics==8.2.18
+opencv-python-headless==4.9.0.80
+Pillow==10.3.0
+python-dotenv==1.0.1
