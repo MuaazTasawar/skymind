@@ -24,11 +24,36 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rplanner.proto')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rplanner.proto\x12\x07planner\"\"\n\x06LatLng\x12\x0b\n\x03lat\x18\x01 \x01(\x01\x12\x0b\n\x03lng\x18\x02 \x01(\x01\"3\n\x08Waypoint\x12\x0b\n\x03lat\x18\x01 \x01(\x01\x12\x0b\n\x03lng\x18\x02 \x01(\x01\x12\r\n\x05\x61lt_m\x18\x03 \x01(\x01\"V\n\tDroneInfo\x12\x10\n\x08\x64rone_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03lat\x18\x03 \x01(\x01\x12\x0b\n\x03lng\x18\x04 \x01(\x01\x12\x0f\n\x07\x62\x61ttery\x18\x05 \x01(\x05\"\x7f\n\x0eZoneAssignment\x12\x0f\n\x07zone_id\x18\x01 \x01(\t\x12\x10\n\x08\x64rone_id\x18\x02 \x01(\t\x12$\n\twaypoints\x18\x03 \x03(\x0b\x32\x11.planner.Waypoint\x12$\n\x0bsub_polygon\x18\x04 \x03(\x0b\x32\x0f.planner.LatLng\"\xb3\x01\n\x12PlanMissionRequest\x12\x12\n\nmission_id\x18\x01 \x01(\t\x12%\n\x0czone_polygon\x18\x02 \x03(\x0b\x32\x0f.planner.LatLng\x12\"\n\x06\x64rones\x18\x03 \x03(\x0b\x32\x12.planner.DroneInfo\x12\x12\n\naltitude_m\x18\x04 \x01(\x01\x12\x13\n\x0b\x61irspeed_ms\x18\x05 \x01(\x01\x12\x15\n\rstrip_width_m\x18\x06 \x01(\x01\"p\n\x13PlanMissionResponse\x12\x12\n\nmission_id\x18\x01 \x01(\t\x12&\n\x05zones\x18\x02 \x03(\x0b\x32\x17.planner.ZoneAssignment\x12\x0e\n\x06status\x18\x03 \x01(\t\x12\r\n\x05\x65rror\x18\x04 \x01(\t\"\xca\x01\n\x13ReassignZoneRequest\x12\x12\n\nmission_id\x18\x01 \x01(\t\x12\x18\n\x10\x66\x61ulted_drone_id\x18\x02 \x01(\t\x12\x17\n\x0f\x66\x61ulted_zone_id\x18\x03 \x01(\t\x12,\n\x10\x61vailable_drones\x18\x04 \x03(\x0b\x32\x12.planner.DroneInfo\x12\x12\n\naltitude_m\x18\x05 \x01(\x01\x12\x13\n\x0b\x61irspeed_ms\x18\x06 \x01(\x01\x12\x15\n\rstrip_width_m\x18\x07 \x01(\x01\"\x7f\n\x14ReassignZoneResponse\x12\x1c\n\x14replacement_drone_id\x18\x01 \x01(\t\x12*\n\tnew_zones\x18\x02 \x03(\x0b\x32\x17.planner.ZoneAssignment\x12\x0e\n\x06status\x18\x03 \x01(\t\x12\r\n\x05\x65rror\x18\x04 \x01(\t\"{\n\x14\x44\x65tectObjectsRequest\x12\x10\n\x08\x64rone_id\x18\x01 \x01(\t\x12\x12\n\nmission_id\x18\x02 \x01(\t\x12\x12\n\nframe_jpeg\x18\x03 \x01(\x0c\x12\x13\n\x0b\x66rame_width\x18\x04 \x01(\x05\x12\x14\n\x0c\x66rame_height\x18\x05 \x01(\x05\"^\n\tDetection\x12\r\n\x05label\x18\x01 \x01(\t\x12\x12\n\nconfidence\x18\x02 \x01(\x02\x12\n\n\x02x1\x18\x03 \x01(\x02\x12\n\n\x02y1\x18\x04 \x01(\x02\x12\n\n\x02x2\x18\x05 \x01(\x02\x12\n\n\x02y2\x18\x06 \x01(\x02\"g\n\x15\x44\x65tectObjectsResponse\x12\x10\n\x08\x64rone_id\x18\x01 \x01(\t\x12&\n\ndetections\x18\x02 \x03(\x0b\x32\x12.planner.Detection\x12\x14\n\x0ctimestamp_ms\x18\x03 \x01(\x03\x32\xf7\x01\n\x0ePlannerService\x12H\n\x0bPlanMission\x12\x1b.planner.PlanMissionRequest\x1a\x1c.planner.PlanMissionResponse\x12K\n\x0cReassignZone\x12\x1c.planner.ReassignZoneRequest\x1a\x1d.planner.ReassignZoneResponse\x12N\n\rDetectObjects\x12\x1d.planner.DetectObjectsRequest\x1a\x1e.planner.DetectObjectsResponseB5Z3github.com/MuaazTasawar/skymind/gateway/proto;protob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'planner_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'Z3github.com/MuaazTasawar/skymind/gateway/proto;proto'
+  _globals['_LATLNG']._serialized_start=26
+  _globals['_LATLNG']._serialized_end=60
+  _globals['_WAYPOINT']._serialized_start=62
+  _globals['_WAYPOINT']._serialized_end=113
+  _globals['_DRONEINFO']._serialized_start=115
+  _globals['_DRONEINFO']._serialized_end=201
+  _globals['_ZONEASSIGNMENT']._serialized_start=203
+  _globals['_ZONEASSIGNMENT']._serialized_end=330
+  _globals['_PLANMISSIONREQUEST']._serialized_start=333
+  _globals['_PLANMISSIONREQUEST']._serialized_end=512
+  _globals['_PLANMISSIONRESPONSE']._serialized_start=514
+  _globals['_PLANMISSIONRESPONSE']._serialized_end=626
+  _globals['_REASSIGNZONEREQUEST']._serialized_start=629
+  _globals['_REASSIGNZONEREQUEST']._serialized_end=831
+  _globals['_REASSIGNZONERESPONSE']._serialized_start=833
+  _globals['_REASSIGNZONERESPONSE']._serialized_end=960
+  _globals['_DETECTOBJECTSREQUEST']._serialized_start=962
+  _globals['_DETECTOBJECTSREQUEST']._serialized_end=1085
+  _globals['_DETECTION']._serialized_start=1087
+  _globals['_DETECTION']._serialized_end=1181
+  _globals['_DETECTOBJECTSRESPONSE']._serialized_start=1183
+  _globals['_DETECTOBJECTSRESPONSE']._serialized_end=1286
+  _globals['_PLANNERSERVICE']._serialized_start=1289
+  _globals['_PLANNERSERVICE']._serialized_end=1536
 # @@protoc_insertion_point(module_scope)

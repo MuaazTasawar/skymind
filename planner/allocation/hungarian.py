@@ -19,7 +19,7 @@ If M < N: zones are assigned round-robin to available drones
 from typing import List, Dict, Any, Tuple
 import math
 
-from ..coverage.polygon_utils import haversine_m, LatLng
+from coverage.polygon_utils import haversine_m, LatLng
 
 # Type aliases
 DroneInfo = Dict[str, Any]   # {drone_id, name, lat, lng, battery}

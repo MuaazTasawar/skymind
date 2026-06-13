@@ -3,6 +3,7 @@
 import grpc
 import warnings
 
+from proto import planner_pb2 as planner__pb2
 
 GRPC_GENERATED_VERSION = '1.81.1'
 GRPC_VERSION = grpc.__version__
@@ -22,3 +23,161 @@ if _version_not_supported:
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
+
+
+class PlannerServiceStub:
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.PlanMission = channel.unary_unary(
+                '/planner.PlannerService/PlanMission',
+                request_serializer=planner__pb2.PlanMissionRequest.SerializeToString,
+                response_deserializer=planner__pb2.PlanMissionResponse.FromString,
+                _registered_method=True)
+        self.ReassignZone = channel.unary_unary(
+                '/planner.PlannerService/ReassignZone',
+                request_serializer=planner__pb2.ReassignZoneRequest.SerializeToString,
+                response_deserializer=planner__pb2.ReassignZoneResponse.FromString,
+                _registered_method=True)
+        self.DetectObjects = channel.unary_unary(
+                '/planner.PlannerService/DetectObjects',
+                request_serializer=planner__pb2.DetectObjectsRequest.SerializeToString,
+                response_deserializer=planner__pb2.DetectObjectsResponse.FromString,
+                _registered_method=True)
+
+
+class PlannerServiceServicer:
+    """Missing associated documentation comment in .proto file."""
+
+    def PlanMission(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReassignZone(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DetectObjects(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_PlannerServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'PlanMission': grpc.unary_unary_rpc_method_handler(
+                    servicer.PlanMission,
+                    request_deserializer=planner__pb2.PlanMissionRequest.FromString,
+                    response_serializer=planner__pb2.PlanMissionResponse.SerializeToString,
+            ),
+            'ReassignZone': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReassignZone,
+                    request_deserializer=planner__pb2.ReassignZoneRequest.FromString,
+                    response_serializer=planner__pb2.ReassignZoneResponse.SerializeToString,
+            ),
+            'DetectObjects': grpc.unary_unary_rpc_method_handler(
+                    servicer.DetectObjects,
+                    request_deserializer=planner__pb2.DetectObjectsRequest.FromString,
+                    response_serializer=planner__pb2.DetectObjectsResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'planner.PlannerService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('planner.PlannerService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class PlannerService:
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def PlanMission(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/planner.PlannerService/PlanMission',
+            planner__pb2.PlanMissionRequest.SerializeToString,
+            planner__pb2.PlanMissionResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ReassignZone(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/planner.PlannerService/ReassignZone',
+            planner__pb2.ReassignZoneRequest.SerializeToString,
+            planner__pb2.ReassignZoneResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DetectObjects(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/planner.PlannerService/DetectObjects',
+            planner__pb2.DetectObjectsRequest.SerializeToString,
+            planner__pb2.DetectObjectsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
